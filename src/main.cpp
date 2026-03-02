@@ -8,14 +8,25 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc < 3) {
+        std::cout << "HELP PRINT// TODO\n";
+        return -1;
+    }
+
     node* root = initMorseTree();
-    string message = "hello world";
-    vector<string> encoded = encode(message, root);
 
-    for (const auto& part : encoded) cout << part;
+    std::string command = argv[1];
 
-    cout << endl;
+    if (command == "--encode" || command == "-e") {
+        std::string message_to_encode = argv[2];
+        std::vector<std::string> encoded_message = encode(message_to_encode, root);
+
+        for (std::string enc : encoded_message) {
+            std::cout << enc << " ";
+        }
+        std::cout << std::endl;
+    }
 
     return 0;
 }
