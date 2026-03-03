@@ -2,6 +2,7 @@
 #include "../include/morse_tree.hpp"
 
 #include <cctype>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -26,6 +27,31 @@ int main(int argc, char* argv[]) {
             std::cout << enc << " ";
         }
         std::cout << std::endl;
+    }
+
+    if (command == "--encode-file" || command == "-ef") {
+        std::string file_path = argv[2];
+        std::string output_file = "encoded_file.morse";
+        if (argc == 4) {
+            output_file = argv[3];
+        }
+        std::ofstream file(output_file);
+        std::ifstream fin(file_path);
+
+        std::string line;
+
+        while (getline(fin, line)) {
+            std::vector<std::string> encoded_line = encode(line, root);
+            for (std::string x : encoded_line) {
+                std::cout << x << " ";
+                file << x;
+            }
+            file << '\n';
+            std::cout << std::endl;
+        }
+
+        file.close();
+        fin.close();
     }
 
     return 0;
