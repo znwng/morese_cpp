@@ -1,3 +1,4 @@
+#include "../include/decoder.hpp"
 #include "../include/encoder.hpp"
 #include "../include/morse_tree.hpp"
 
@@ -52,6 +53,13 @@ int main(int argc, char* argv[]) {
 
         file.close();
         fin.close();
+    }
+
+    if (command == "--decode" || command == "-d") {
+        std::string message_to_decode = argv[2];
+        std::string decoded_message = decode(message_to_decode, root);
+
+        std::cout << decoded_message << std::endl;
     }
 
     return 0;
