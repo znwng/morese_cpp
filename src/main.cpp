@@ -43,11 +43,13 @@ int main(int argc, char* argv[]) {
 
         while (getline(fin, line)) {
             std::vector<std::string> encoded_line = encode(line, root);
-            for (std::string x : encoded_line) {
-                std::cout << x << " ";
-                file << x;
+            for (size_t i = 0; i < encoded_line.size(); ++i) {
+                file << encoded_line[i];
+                if (i != encoded_line.size() - 1) file << ' ';
             }
-            file << '\n';
+            file << "\n";
+            std::cout << line << " => ";
+            for (const auto& x : encoded_line) std::cout << x << " ";
             std::cout << std::endl;
         }
 
@@ -60,6 +62,30 @@ int main(int argc, char* argv[]) {
         std::string decoded_message = decode(message_to_decode, root);
 
         std::cout << decoded_message << std::endl;
+    }
+
+    if (command == "--decode-file" || command == "-df") {
+        std::string file_path = argv[2];
+        std::string output_file = (argc > 3) ? argv[3] : "decoded_file";
+
+        std::ifstream fin(file_path);
+        if (!fin) {
+            std::cerr << "Error opening input file: " << file_path << std::endl;
+            return -1;
+        }
+
+        std::ofstream file(output_file);
+        if (!file) {
+            std::cerr << "Error creating output file: " << output_file << std::endl;
+            return -1;
+        }
+
+        std::string line;
+        while (getline(fin, line)) {
+            std::string decoded_line = decode(line, root);
+            file << decoded_line << '\n';
+            std::cout << decoded_line << std::endl;
+        }
     }
 
     return 0;
