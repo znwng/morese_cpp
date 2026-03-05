@@ -48,9 +48,6 @@ int main(int argc, char* argv[]) {
                 if (i != encoded_line.size() - 1) file << ' ';
             }
             file << "\n";
-            std::cout << line << " => ";
-            for (const auto& x : encoded_line) std::cout << x << " ";
-            std::cout << std::endl;
         }
 
         file.close();
@@ -84,7 +81,6 @@ int main(int argc, char* argv[]) {
         while (getline(fin, line)) {
             std::string decoded_line = decode(line, root);
             file << decoded_line << '\n';
-            std::cout << decoded_line << std::endl;
         }
     }
 
