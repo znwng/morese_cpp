@@ -1,5 +1,4 @@
 morese
 build/
 deploy.sh
-sample.txt
 *.morse
