@@ -1,4 +1,4 @@
-CC = clang++
+CC = clang++-22
 CFLAGS = -I./include -Wall -Wextra -std=c++17
 SRC_DIR = src
 BUILD_DIR = build

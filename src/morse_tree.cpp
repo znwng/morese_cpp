@@ -1,4 +1,4 @@
-#include "../include/morse_tree.hpp"
+#include "morse_tree.hpp"
 
 node::node(char v) {
     value = v;
